@@ -6,9 +6,13 @@ def principal():
     return render_template("principal.html")
 
 
-@app.route('/potencia/<int:bp>/<int:ep>')
+@app.route('/potencia/<int:bp>/<int:ep>/', methods=["GET","POST"])
 def potencia(bp, ep):
-    return render_template("potencia.html", base=bp, exponente=ep, solucion=bp**ep)
+    if ep <= -1:
+        ep2 = ep * -1
+        return render_template("potencia.html", base=bp, exponente=ep, solucion=bp**ep, solucion2=bp**ep2)
+    else:
+        return render_template("potencia.html", base=bp, exponente=ep, solucion=bp**ep)
 
 @app.route('/cuentaletras/')
 def cuentaletras():
