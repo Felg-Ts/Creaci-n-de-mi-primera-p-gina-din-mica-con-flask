@@ -14,10 +14,15 @@ def potencia(bp, ep):
     else:
         return render_template("potencia.html", base=bp, exponente=ep, solucion=bp**ep)
 
-@app.route('/cuentaletras/')
-def cuentaletras():
+@app.route('/cuenta/<string:palabra>/<string:letra>/')
+def cuentaletras(palabra, letra):
+    cont = 0
 
-    return render_template("cuentaletras.html")
+    for i in palabra:
+        if i == letra:
+            cont = cont + 1
+    rels = (f"En la palabra {palabra} aparece {cont} veces el carácter {letra}")
+    return render_template("cuentaletras.html", aparece=rels)
 
 
 
